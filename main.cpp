@@ -8,7 +8,7 @@
 using namespace httplib;
 using namespace std;
 
-// Pomocnicza funkcja do wczytywania plików (HTML, CSS)
+// testowy push
 string readFile(const string& filename) {
     ifstream file(filename);
     if (!file.is_open()) return "";
