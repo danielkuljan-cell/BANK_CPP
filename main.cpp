@@ -4,43 +4,45 @@
 
 #include "Bank.h"
 
+using namespace std;
+
 void wyczyscEkran() {
     system("cls");
 }
 
 void czekaj() {
-    std::cout << "\nNacisnij Enter, aby kontynuowac...";
-    std::cin.get();
+    cout << "\nNacisnij Enter, aby kontynuowac...";
+    cin.get();
 }
 
 void czyscCin() {
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
 int main() {
     Bank bank;
 
     if (bank.wczytajUzytkownikowZPliku("uzytkownicy.csv") == false) {
-        std::cout << "Nie udalo sie wczytac pliku.\n";
+        cout << "Nie udalo sie wczytac pliku.\n";
         return 0;
     }
 
     while (true) {
-        std::string login;
-        std::string pin;
+        string login;
+        string pin;
 
         wyczyscEkran();
-        std::cout << "=== BANK ===\n";
-        std::cout << "Login: ";
-        std::cin >> login;
-        std::cout << "PIN: ";
-        std::cin >> pin;
+        cout << "=== BANK ===\n";
+        cout << "Login: ";
+        cin >> login;
+        cout << "PIN: ";
+        cin >> pin;
 
         KontoBankowe* konto = bank.zaloguj(login, pin);
 
         if (konto == nullptr) {
-            std::cout << "\nBledny login albo PIN.\n";
+            cout << "\nBledny login albo PIN.\n";
             czyscCin();
             czekaj();
             continue;
@@ -50,23 +52,23 @@ int main() {
 
         while (wybor != 5) {
             wyczyscEkran();
-            std::cout << "Witaj, " << konto->imie << "\n\n";
-            std::cout << "1. Pokaz dane\n";
-            std::cout << "2. Pokaz saldo\n";
-            std::cout << "3. Wplac pieniadze\n";
-            std::cout << "4. Wyplac pieniadze\n";
-            std::cout << "5. Wyloguj\n";
-            std::cout << "Wybor: ";
-            std::cin >> wybor;
+            cout << "Witaj, " << konto->imie << "\n\n";
+            cout << "1. Pokaz dane\n";
+            cout << "2. Pokaz saldo\n";
+            cout << "3. Wplac pieniadze\n";
+            cout << "4. Wyplac pieniadze\n";
+            cout << "5. Wyloguj\n";
+            cout << "Wybor: ";
+            cin >> wybor;
 
-            if (std::cin.fail()) {
+            if (cin.fail()) {
                 czyscCin();
-                std::cout << "To nie jest liczba.\n";
+                cout << "To nie jest liczba.\n";
                 czekaj();
                 continue;
             }
 
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             wyczyscEkran();
 
             switch (wybor) {
@@ -76,30 +78,30 @@ int main() {
                     break;
 
                 case 2:
-                    std::cout << "Saldo: " << konto->saldo << " PLN\n";
+                    cout << "Saldo: " << konto->saldo << " PLN\n";
                     czekaj();
                     break;
 
                 case 3: {
                     double kwota;
 
-                    std::cout << "Podaj kwote wplaty: ";
-                    std::cin >> kwota;
+                    cout << "Podaj kwote wplaty: ";
+                    cin >> kwota;
 
-                    if (std::cin.fail()) {
+                    if (cin.fail()) {
                         czyscCin();
-                        std::cout << "Zla kwota.\n";
+                        cout << "Zla kwota.\n";
                         czekaj();
                         continue;
                     }
 
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                     if (konto->wplac(kwota)) {
                         bank.zapiszUzytkownikowDoPliku("uzytkownicy.csv");
-                        std::cout << "Wplacono pieniadze.\n";
+                        cout << "Wplacono pieniadze.\n";
                     } else {
-                        std::cout << "Kwota musi byc wieksza od zera.\n";
+                        cout << "Kwota musi byc wieksza od zera.\n";
                     }
 
                     czekaj();
@@ -109,23 +111,23 @@ int main() {
                 case 4: {
                     double kwota;
 
-                    std::cout << "Podaj kwote wyplaty: ";
-                    std::cin >> kwota;
+                    cout << "Podaj kwote wyplaty: ";
+                    cin >> kwota;
 
-                    if (std::cin.fail()) {
+                    if (cin.fail()) {
                         czyscCin();
-                        std::cout << "Zla kwota.\n";
+                        cout << "Zla kwota.\n";
                         czekaj();
                         continue;
                     }
 
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                     if (konto->wyplac(kwota)) {
                         bank.zapiszUzytkownikowDoPliku("uzytkownicy.csv");
-                        std::cout << "Wyplacono pieniadze.\n";
+                        cout << "Wyplacono pieniadze.\n";
                     } else {
-                        std::cout << "Nie mozna wyplacic takiej kwoty.\n";
+                        cout << "Nie mozna wyplacic takiej kwoty.\n";
                     }
 
                     czekaj();
@@ -133,11 +135,11 @@ int main() {
                 }
 
                 case 5:
-                    std::cout << "Wylogowano.\n";
+                    cout << "Wylogowano.\n";
                     break;
 
                 default:
-                    std::cout << "Nie ma takiej opcji.\n";
+                    cout << "Nie ma takiej opcji.\n";
                     czekaj();
                     break;
             }
@@ -145,8 +147,8 @@ int main() {
 
         char koniec;
 
-        std::cout << "\nZakonczyc program? t/n: ";
-        std::cin >> koniec;
+        cout << "\nZakonczyc program? t/n: ";
+        cin >> koniec;
 
         if (koniec == 't' || koniec == 'T') {
             break;
