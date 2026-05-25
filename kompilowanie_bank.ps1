@@ -1,0 +1,1 @@
+g++ main.cpp Bank.cpp KontoBankowe.cpp -o bank.exe
