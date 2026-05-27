@@ -1,23 +1,22 @@
 #ifndef KONTO_BANKOWE_H
 #define KONTO_BANKOWE_H
-
 #include <string>
+#include "Klient.h"
+using namespace std;
 
 class KontoBankowe {
 public:
     int id;
-    std::string imie;
-    std::string login;
-    std::string pin;
+    Klient klient;
     double saldo;
-    std::string iban;
-    std::string typKonta;
+    string iban;
+    string typKonta;
 
-    void pokazDane();
+    void pokazDane() const;
     bool wplac(double kwota);
     bool wyplac(double kwota);
     void zabezpieczSaldo();
-    std::string doLiniiCsv();
+    string doLiniiCsv() const;
 };
 
 #endif

@@ -1,18 +1,17 @@
 #ifndef BANK_H
 #define BANK_H
-
 #include <string>
 #include <vector>
-
 #include "KontoBankowe.h"
+using namespace std;
 
 class Bank {
 public:
-    std::vector<KontoBankowe> konta;
+    vector<KontoBankowe> konta;
 
-    bool wczytajUzytkownikowZPliku(std::string nazwaPliku);
-    bool zapiszUzytkownikowDoPliku(std::string nazwaPliku);
-    KontoBankowe* zaloguj(std::string login, std::string pin);
+    bool wczytajUzytkownikowZPliku(string nazwaPliku);
+    bool zapiszUzytkownikowDoPliku(string nazwaPliku);
+    KontoBankowe* zaloguj(string login, string pin);
 };
 
 #endif

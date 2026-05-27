@@ -1,20 +1,15 @@
 #include "KontoBankowe.h"
-#include <iomanip>
 #include <iostream>
 #include <sstream>
+using namespace std;
 
-
-
-
-void KontoBankowe::pokazDane() {
-    zabezpieczSaldo();
-
-    std::cout << "\nDANE KONTA\n";
-    std::cout << "Imie i nazwisko: " << imie << "\n";
-    std::cout << "Login: " << login << "\n";
-    std::cout << "IBAN: " << iban << "\n";
-    std::cout << "Typ konta: " << typKonta << "\n";
-    std::cout << "Saldo: " << std::fixed << std::setprecision(2) << saldo << " PLN\n";
+void KontoBankowe::pokazDane() const {
+    cout << "\nDANE KONTA\n";
+    cout << "Imie i nazwisko: " << klient.imie << "\n";
+    cout << "Login: " << klient.login << "\n";
+    cout << "IBAN: " << iban << "\n";
+    cout << "Typ konta: " << typKonta << "\n";
+    cout << "Saldo: " << saldo << " PLN\n";
 }
 
 bool KontoBankowe::wplac(double kwota) {
@@ -24,7 +19,7 @@ bool KontoBankowe::wplac(double kwota) {
         return false;
     }
 
-    saldo = saldo + kwota;
+    saldo += kwota;
     return true;
 }
 
@@ -35,7 +30,7 @@ bool KontoBankowe::wyplac(double kwota) {
         return false;
     }
 
-    saldo = saldo - kwota;
+    saldo -= kwota;
     return true;
 }
 
@@ -45,16 +40,14 @@ void KontoBankowe::zabezpieczSaldo() {
     }
 }
 
-std::string KontoBankowe::doLiniiCsv() {
-    zabezpieczSaldo();
-
-    std::stringstream linia;
+string KontoBankowe::doLiniiCsv() const {
+    stringstream linia;
 
     linia << id << ","
-          << imie << ","
-          << login << ","
-          << pin << ","
-          << std::fixed << std::setprecision(2) << saldo << ","
+          << klient.imie << ","
+          << klient.login << ","
+          << klient.pin << ","
+          << saldo << ","
           << iban << ","
           << typKonta;
 

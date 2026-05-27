@@ -52,7 +52,7 @@ int main() {
 
         while (wybor != 5) {
             wyczyscEkran();
-            cout << "Witaj, " << konto->imie << "\n\n";
+            cout << "Witaj, " << konto->klient.imie << "\n\n";
             cout << "1. Pokaz dane\n";
             cout << "2. Pokaz saldo\n";
             cout << "3. Wplac pieniadze\n";

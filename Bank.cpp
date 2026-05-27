@@ -1,10 +1,10 @@
 #include "Bank.h"
-
 #include <fstream>
 #include <sstream>
+using namespace std;
 
-bool Bank::wczytajUzytkownikowZPliku(std::string nazwaPliku) {
-    std::ifstream plik(nazwaPliku);
+bool Bank::wczytajUzytkownikowZPliku(string nazwaPliku) {
+    ifstream plik(nazwaPliku);
 
     if (!plik) {
         return false;
@@ -12,25 +12,25 @@ bool Bank::wczytajUzytkownikowZPliku(std::string nazwaPliku) {
 
     konta.clear();
 
-    std::string linia;
-    std::getline(plik, linia);
+    string linia;
+    getline(plik, linia);
 
-    while (std::getline(plik, linia)) {
-        std::stringstream ss(linia);
+    while (getline(plik, linia)) {
+        stringstream ss(linia);
         KontoBankowe konto;
-        std::string id;
-        std::string saldo;
+        string id;
+        string saldo;
 
-        std::getline(ss, id, ',');
-        std::getline(ss, konto.imie, ',');
-        std::getline(ss, konto.login, ',');
-        std::getline(ss, konto.pin, ',');
-        std::getline(ss, saldo, ',');
-        std::getline(ss, konto.iban, ',');
-        std::getline(ss, konto.typKonta, ',');
+        getline(ss, id, ',');
+        getline(ss, konto.klient.imie, ',');
+        getline(ss, konto.klient.login, ',');
+        getline(ss, konto.klient.pin, ',');
+        getline(ss, saldo, ',');
+        getline(ss, konto.iban, ',');
+        getline(ss, konto.typKonta, ',');
 
-        konto.id = std::stoi(id);
-        konto.saldo = std::stod(saldo);
+        konto.id = stoi(id);
+        konto.saldo = stod(saldo);
         konto.zabezpieczSaldo();
 
         konta.push_back(konto);
@@ -39,8 +39,8 @@ bool Bank::wczytajUzytkownikowZPliku(std::string nazwaPliku) {
     return true;
 }
 
-bool Bank::zapiszUzytkownikowDoPliku(std::string nazwaPliku) {
-    std::ofstream plik(nazwaPliku);
+bool Bank::zapiszUzytkownikowDoPliku(string nazwaPliku) {
+    ofstream plik(nazwaPliku);
 
     if (!plik) {
         return false;
@@ -48,17 +48,17 @@ bool Bank::zapiszUzytkownikowDoPliku(std::string nazwaPliku) {
 
     plik << "ID,Imie,Login,PIN,Money,IBAN,TypKonta\n";
 
-    for (int i = 0; i < konta.size(); i++) {
-        plik << konta[i].doLiniiCsv() << "\n";
+    for (const auto& konto : konta) {
+        plik << konto.doLiniiCsv() << "\n";
     }
 
     return true;
 }
 
-KontoBankowe* Bank::zaloguj(std::string login, std::string pin) {
-    for (int i = 0; i < konta.size(); i++) {
-        if (konta[i].login == login && konta[i].pin == pin) {
-            return &konta[i];
+KontoBankowe* Bank::zaloguj(string login, string pin) {
+    for (auto& konto : konta) {
+        if (konto.klient.login == login && konto.klient.pin == pin) {
+            return &konto;
         }
     }
 
