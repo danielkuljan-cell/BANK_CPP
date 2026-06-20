@@ -1,1 +1,1 @@
-g++ main.cpp Bank.cpp KontoBankowe.cpp -o bank.exe
+g++ main.cpp Bank.cpp KontoBankowe.cpp Interfejs.cpp -o bank.exe -lwinmm

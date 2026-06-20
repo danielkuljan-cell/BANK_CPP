@@ -12,6 +12,10 @@ public:
     bool wczytajUzytkownikowZPliku(string nazwaPliku);
     bool zapiszUzytkownikowDoPliku(string nazwaPliku);
     KontoBankowe* zaloguj(string login, string pin);
+    KontoBankowe* znajdzKonto(string ibanLubLogin);
+
+    // dla admina - zaklada nowe konto, false jak login juz zajety
+    bool stworzKonto(string imie, string login, string pin, string typKonta);
 };
 
 #endif

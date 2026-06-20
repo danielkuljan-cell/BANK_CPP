@@ -1,0 +1,12 @@
+# pliki obiektowe
+*.o
+
+# duzy wygenerowany plik audio - mozna odtworzyc z hava.mp3 (patrz README)
+hava.wav
+
+# materialy z wykladow - nie sa czescia projektu
+W*.pdf
+
+# sprawozdanie - osobny dokument, jeszcze w trakcie
+Sprawozdanie_Bank.docx
+Sprawozdanie_Bank.pdf
