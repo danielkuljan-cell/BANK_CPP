@@ -135,7 +135,6 @@ void panelAdmina(Bank& bank) {
         wierszRamki("  [4] Wyloguj", "");
         ramkaDol();
         cout << "\n  Wybor: ";
-        wlaczMuzykeTla();   // tlo wraca jak wrocimy do menu admina
         cin >> wybor;
 
         if (cin.fail()) {
@@ -265,7 +264,6 @@ int main() {
         while (wybor != 6) {
             wyczyscEkran();
             pokazPulpit(konto);
-            wlaczMuzykeTla();   // jak wracamy do menu to tlo znowu leci
             cin >> wybor;
 
             if (cin.fail()) {

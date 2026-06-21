@@ -139,6 +139,10 @@ void zagrajHavaNagila() {
 }
 
 void zagrajPlacz() {
-    // krotki placz przy wybieraniu w menu (tez przerywa tlo - jeden kanal)
-    PlaySoundA("plakal.wav", NULL, SND_FILENAME | SND_ASYNC);
+    // placz lecimy przez MCI, a nie PlaySound - dzieki temu gra na osobnym
+    // kanale i NIE wylacza muzyki z tla (Windows miksuje oba dzwieki naraz).
+    // close + open + "play from 0" zeby przy kazdym kliknieciu zaczynal od nowa.
+    mciSendStringA("close placz", NULL, 0, NULL);
+    mciSendStringA("open \"plakal.wav\" type waveaudio alias placz", NULL, 0, NULL);
+    mciSendStringA("play placz from 0", NULL, 0, NULL);
 }
