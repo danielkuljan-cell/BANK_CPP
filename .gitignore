@@ -1,10 +1,6 @@
 # pliki obiektowe
 *.o
 
-# duze wygenerowane pliki audio - mozna odtworzyc z mp3 (patrz README)
-hava.wav
-tlo.wav
-
 # plik roboczy z muzyka
 hd.mp3
 
