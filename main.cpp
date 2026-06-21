@@ -135,6 +135,7 @@ void panelAdmina(Bank& bank) {
         wierszRamki("  [4] Wyloguj", "");
         ramkaDol();
         cout << "\n  Wybor: ";
+        wlaczMuzykeTla();   // tlo wraca jak wrocimy do menu admina
         cin >> wybor;
 
         if (cin.fail()) {
@@ -145,6 +146,7 @@ void panelAdmina(Bank& bank) {
         }
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        zagrajPlacz();   // placz przy wyborze z panelu admina
         wyczyscEkran();
 
         switch (wybor) {
@@ -263,6 +265,7 @@ int main() {
         while (wybor != 6) {
             wyczyscEkran();
             pokazPulpit(konto);
+            wlaczMuzykeTla();   // jak wracamy do menu to tlo znowu leci
             cin >> wybor;
 
             if (cin.fail()) {
@@ -273,6 +276,7 @@ int main() {
             }
 
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            zagrajPlacz();   // placz przy kazdym wyborze z menu
             wyczyscEkran();
 
             switch (wybor) {

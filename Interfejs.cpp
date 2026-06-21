@@ -137,3 +137,8 @@ void zagrajHavaNagila() {
     // gra hava.wav (przerywa muzyke tla, bo PlaySound ma jeden kanal)
     PlaySoundA("hava.wav", NULL, SND_FILENAME | SND_ASYNC);
 }
+
+void zagrajPlacz() {
+    // krotki placz przy wybieraniu w menu (tez przerywa tlo - jeden kanal)
+    PlaySoundA("plakal.wav", NULL, SND_FILENAME | SND_ASYNC);
+}
