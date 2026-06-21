@@ -97,6 +97,11 @@ void ramkaDol() {
 }
 
 void wierszRamki(string tekst, string kolor) {
+    // jak tekst za dlugi to przycinamy, zeby ramka nie wyjechala
+    if ((int)tekst.length() > szerokosc) {
+        tekst = tekst.substr(0, szerokosc);
+    }
+
     cout << CYAN << "║ " << RESET;
     cout << kolor << tekst << RESET;
 

@@ -92,9 +92,12 @@ void pokazWszystkieKonta(Bank& bank) {
 
 // admin - kto komu zrobil przelew (czyta z pliku historia.csv)
 void pokazHistoriePrzelewow() {
+    // naglowek w ramce, a wpisy pod spodem jako zwykle linie
+    // (przelewy moga miec dlugie nazwy, wiec ramka by sie rozjechala)
     ramkaGora();
     wierszRamki("  HISTORIA PRZELEWOW", ZOLTY + JASNY);
-    ramkaSrodek();
+    ramkaDol();
+    cout << "\n";
 
     ifstream plik("historia.csv");
     bool cos = false;
@@ -105,16 +108,14 @@ void pokazHistoriePrzelewow() {
             if (linia.empty()) {
                 continue;
             }
-            wierszRamki("  " + linia, "");
+            cout << "  " << ZIELONY << linia << RESET << "\n";
             cos = true;
         }
     }
 
     if (!cos) {
-        wierszRamki("  (jeszcze nie bylo zadnych przelewow)", "");
+        cout << "  (jeszcze nie bylo zadnych przelewow)\n";
     }
-
-    ramkaDol();
 }
 
 // menu admina - moze ogladac konta, zakladac nowe i widziec przelewy
