@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 #include <limits>
 
 #include "Bank.h"
@@ -89,11 +90,38 @@ void pokazWszystkieKonta(Bank& bank) {
     ramkaDol();
 }
 
-// menu admina - moze ogladac konta i zakladac nowe
+// admin - kto komu zrobil przelew (czyta z pliku historia.csv)
+void pokazHistoriePrzelewow() {
+    ramkaGora();
+    wierszRamki("  HISTORIA PRZELEWOW", ZOLTY + JASNY);
+    ramkaSrodek();
+
+    ifstream plik("historia.csv");
+    bool cos = false;
+
+    if (plik) {
+        string linia;
+        while (getline(plik, linia)) {
+            if (linia.empty()) {
+                continue;
+            }
+            wierszRamki("  " + linia, "");
+            cos = true;
+        }
+    }
+
+    if (!cos) {
+        wierszRamki("  (jeszcze nie bylo zadnych przelewow)", "");
+    }
+
+    ramkaDol();
+}
+
+// menu admina - moze ogladac konta, zakladac nowe i widziec przelewy
 void panelAdmina(Bank& bank) {
     int wybor = 0;
 
-    while (wybor != 3) {
+    while (wybor != 4) {
         wyczyscEkran();
         naglowekBanku();
         cout << "\n";
@@ -102,7 +130,8 @@ void panelAdmina(Bank& bank) {
         ramkaSrodek();
         wierszRamki("  [1] Pokaz wszystkie konta", "");
         wierszRamki("  [2] Stworz nowe konto", "");
-        wierszRamki("  [3] Wyloguj", "");
+        wierszRamki("  [3] Historia przelewow", "");
+        wierszRamki("  [4] Wyloguj", "");
         ramkaDol();
         cout << "\n  Wybor: ";
         cin >> wybor;
@@ -153,6 +182,11 @@ void panelAdmina(Bank& bank) {
             }
 
             case 3:
+                pokazHistoriePrzelewow();
+                czekaj();
+                break;
+
+            case 4:
                 cout << "Wylogowano admina.\n";
                 break;
 
@@ -167,6 +201,7 @@ void panelAdmina(Bank& bank) {
 int main() {
     wlaczKolory();
     srand(time(NULL));   // do losowania numeru konta
+    wlaczMuzykeTla();    // muzyka leci od razu po wlaczeniu, w kolko
 
     Bank bank;
 
@@ -281,11 +316,13 @@ int main() {
                         ramkaDol();
 
                         zagrajHavaNagila();
+                        czekaj();
+                        wlaczMuzykeTla();   // wracamy do menu - tlo wraca, hava cichnie
                     } else {
                         cout << CZERWONY << "Kwota musi byc wieksza od zera." << RESET << "\n";
+                        czekaj();
                     }
 
-                    czekaj();
                     break;
                 }
 
@@ -382,6 +419,7 @@ int main() {
                     konto->wyplac(kwota);
                     odbiorca->wplac(kwota);
                     bank.zapiszUzytkownikowDoPliku("uzytkownicy.csv");
+                    bank.dopiszHistorie(konto->klient.imie, odbiorca->klient.imie, kwota);
 
                     ramkaGora();
                     wierszRamki("  PRZELEW WYKONANY", ZIELONY + JASNY);
@@ -393,8 +431,8 @@ int main() {
                     ramkaDol();
 
                     zagrajHavaNagila();
-
                     czekaj();
+                    wlaczMuzykeTla();   // tlo wraca, hava cichnie
                     break;
                 }
 

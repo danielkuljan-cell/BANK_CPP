@@ -29,6 +29,7 @@ void ramkaDol();
 void wierszRamki(string tekst, string kolor);
 
 string formatujIban(string iban);   // PL60 1028 1939 ...
+void wlaczMuzykeTla();   // tlo.wav w kolko
 void zagrajHavaNagila();
 
 #endif

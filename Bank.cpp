@@ -1,6 +1,7 @@
 #include "Bank.h"
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 #include <cstdlib>
 #include <cctype>
 using namespace std;
@@ -132,4 +133,15 @@ bool Bank::stworzKonto(string imie, string login, string pin, string typKonta) {
 
     konta.push_back(nowe);
     return true;
+}
+
+void Bank::dopiszHistorie(string nadawca, string odbiorca, double kwota) {
+    // ios::app = dopisujemy na koniec, nie kasujemy starych przelewow
+    ofstream plik("historia.csv", ios::app);
+    if (!plik) {
+        return;
+    }
+
+    plik << nadawca << " -> " << odbiorca << " : "
+         << fixed << setprecision(2) << kwota << " PLN\n";
 }

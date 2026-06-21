@@ -1,8 +1,15 @@
 # pliki obiektowe
 *.o
 
-# duzy wygenerowany plik audio - mozna odtworzyc z hava.mp3 (patrz README)
+# duze wygenerowane pliki audio - mozna odtworzyc z mp3 (patrz README)
 hava.wav
+tlo.wav
+
+# plik roboczy z muzyka
+hd.mp3
+
+# historia przelewow - tworzona w trakcie dzialania programu
+historia.csv
 
 # materialy z wykladow - nie sa czescia projektu
 W*.pdf

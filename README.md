@@ -11,12 +11,13 @@ Prosty bank w konsoli napisany w C++ (projekt studencki).
 - **Przelewy** miedzy kontami (po loginie lub IBAN - tez ze spacjami / bez "PL")
 - **Zabezpieczenia:** PIN maskowany gwiazdkami, blokada po 3 blednych logowaniach,
   potwierdzenie przelewu (t/n) i mozliwosc anulowania (0 = wstecz)
-- **Panel admina** (login `admin`, PIN `admin`) - podglad wszystkich kont
-  i zakladanie nowych kont
+- **Panel admina** (login `admin`, PIN `admin`) - podglad wszystkich kont,
+  zakladanie nowych kont oraz **historia przelewow** (kto komu ile)
 - Zapis stanu kont do pliku CSV po kazdej operacji
 - Kolorowy interfejs (ramki w stylu karty bankowej)
-- Piosenka **Hava Nagila** przy wplacie i przelewie - gra plik `hava.wav`
-  (PlaySound, w tle). Plik powstal z `hava.mp3` poleceniem:
+- **Muzyka w tle** (`tlo.wav`) grajaca w kolko od uruchomienia programu
+- Piosenka **Hava Nagila** przy wplacie i przelewie (`hava.wav`). Pliki .wav
+  powstaja z .mp3 poleceniem, np.:
   `ffmpeg -i hava.mp3 -acodec pcm_s16le -ar 44100 -ac 2 hava.wav`
 
 ## Kompilacja

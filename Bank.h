@@ -16,6 +16,9 @@ public:
 
     // dla admina - zaklada nowe konto, false jak login juz zajety
     bool stworzKonto(string imie, string login, string pin, string typKonta);
+
+    // dopisuje przelew do pliku historia.csv (kto komu ile)
+    void dopiszHistorie(string nadawca, string odbiorca, double kwota);
 };
 
 #endif

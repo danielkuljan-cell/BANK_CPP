@@ -122,7 +122,13 @@ string formatujIban(string iban) {
     return wynik;
 }
 
+void wlaczMuzykeTla() {
+    // muzyka w tle w kolko (SND_LOOP). PlaySound ma jeden kanal, wiec
+    // jak zagra hava.wav to tlo samo ucichnie - nie nakladaja sie.
+    PlaySoundA("tlo.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+}
+
 void zagrajHavaNagila() {
-    // gra hava.wav w tle (SND_ASYNC = nie zatrzymuje programu)
+    // gra hava.wav (przerywa muzyke tla, bo PlaySound ma jeden kanal)
     PlaySoundA("hava.wav", NULL, SND_FILENAME | SND_ASYNC);
 }
