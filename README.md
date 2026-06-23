@@ -1,14 +1,12 @@
 # BANK_CPP
 
-Siema! To moj projekt na studia - taki maly bank, tyle ze caly siedzi w konsoli i jest
-napisany w C++. Mozesz sie zalogowac, sprawdzic kase, cos wplacic albo wyplacic, zrobic
-przelew do kogos innego, a admin podejrzy wszystkie konta. No i leci muzyka, zeby bylo
-smieszniej :)
+Prosty bank konsolowy
+
 
 ## Co to potrafi
 
 - Logowanie loginem i PIN-em. PIN sie maskuje gwiazdkami, tak jak w bankomacie.
-- Pulpit z Twoimi danymi i saldem, narysowany w ramkach jak prawdziwa karta bankowa.
+- Pulpit z danymi i saldem, narysowany w ramkach jak prawdziwa karta bankowa.
 - Wplata i wyplata kasy.
 - **Przelewy** do innych kont - po loginie albo po IBAN (mozesz wpisac ze spacjami albo
   bez "PL", program i tak ogarnie).
@@ -35,15 +33,6 @@ albo recznie:
 ```powershell
 g++ main.cpp Bank.cpp KontoBankowe.cpp Interfejs.cpp -o bank.exe -lwinmm
 ```
-
-`-lwinmm` jest potrzebne do dzwiekow. Pliki `.wav` musza lezec w tym samym folderze co
-program. Pliki dzwiekowe robie z mp3, np.:
-`ffmpeg -i hava.mp3 -acodec pcm_s16le -ar 44100 -ac 2 hava.wav`
-
-> Wazne: jak cos zmienisz w kodzie, musisz przekompilowac od nowa, inaczej `bank.exe`
-> zostanie stary. I zamknij bank przed kompilacja, bo zalaczony plik jest zablokowany.
-
-Potem odpalasz `bank.exe`.
 
 ## Co jest w ktorym pliku
 
