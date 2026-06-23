@@ -1,28 +1,30 @@
 # BANK_CPP
 
-Prosty bank w konsoli napisany w C++ (projekt studencki).
+Siema! To moj projekt na studia - taki maly bank, tyle ze caly siedzi w konsoli i jest
+napisany w C++. Mozesz sie zalogowac, sprawdzic kase, cos wplacic albo wyplacic, zrobic
+przelew do kogos innego, a admin podejrzy wszystkie konta. No i leci muzyka, zeby bylo
+smieszniej :)
 
-## Funkcje
+## Co to potrafi
 
-- Logowanie loginem i PIN-em (dane w pliku `uzytkownicy.csv`)
-- Strona glowna (pulpit) z danymi konta i saldem
-- Podglad danych konta i salda
-- Wplata i wyplata pieniedzy
-- **Przelewy** miedzy kontami (po loginie lub IBAN - tez ze spacjami / bez "PL")
-- **Zabezpieczenia:** PIN maskowany gwiazdkami, blokada po 3 blednych logowaniach,
-  potwierdzenie przelewu (t/n) i mozliwosc anulowania (0 = wstecz)
-- **Panel admina** (login `admin`, PIN `admin`) - podglad wszystkich kont,
-  zakladanie nowych kont oraz **historia przelewow** (kto komu ile)
-- Zapis stanu kont do pliku CSV po kazdej operacji
-- Kolorowy interfejs (ramki w stylu karty bankowej)
-- **Muzyka w tle** (`tlo.wav`) grajaca w kolko od uruchomienia programu
-- Piosenka **Hava Nagila** przy wplacie i przelewie (`hava.wav`). Pliki .wav
-  powstaja z .mp3 poleceniem, np.:
-  `ffmpeg -i hava.mp3 -acodec pcm_s16le -ar 44100 -ac 2 hava.wav`
+- Logowanie loginem i PIN-em. PIN sie maskuje gwiazdkami, tak jak w bankomacie.
+- Pulpit z Twoimi danymi i saldem, narysowany w ramkach jak prawdziwa karta bankowa.
+- Wplata i wyplata kasy.
+- **Przelewy** do innych kont - po loginie albo po IBAN (mozesz wpisac ze spacjami albo
+  bez "PL", program i tak ogarnie).
+- **Zabezpieczenia:** blokada po 3 zlych logowaniach, potwierdzenie przelewu (t/n)
+  i mozliwosc wycofania sie (0 = wstecz).
+- **Panel admina** (login `admin`, PIN `admin`) - widzi wszystkie konta, zaklada nowe
+  i ma **historie przelewow** (kto komu ile przelal).
+- Wszystko zapisuje sie do pliku CSV po kazdej operacji, wiec po wylaczeniu nic nie ginie.
+- **Muzyka w tle** (`tlo.wav`) leci od startu w kolko.
+- **Hava Nagila** (`hava.wav`) przy wplacie i przelewie - taka mala nagroda.
+- **Placz** (`plakal.wav`) przy klikaniu po menu - gra rownoczesnie z muzyka tla,
+  nie wylacza jej.
 
-## Kompilacja
+## Jak to odpalic
 
-W PowerShell uruchom:
+W PowerShell:
 
 ```powershell
 .\kompilowanie_bank.ps1
@@ -34,23 +36,27 @@ albo recznie:
 g++ main.cpp Bank.cpp KontoBankowe.cpp Interfejs.cpp -o bank.exe -lwinmm
 ```
 
-> `-lwinmm` jest potrzebne do odtwarzania dzwieku (Hava Nagila).
-> Piosenka gra z pliku `hava.wav` lezacego w folderze projektu.
+`-lwinmm` jest potrzebne do dzwiekow. Pliki `.wav` musza lezec w tym samym folderze co
+program. Pliki dzwiekowe robie z mp3, np.:
+`ffmpeg -i hava.mp3 -acodec pcm_s16le -ar 44100 -ac 2 hava.wav`
 
-Potem uruchom `bank.exe`.
+> Wazne: jak cos zmienisz w kodzie, musisz przekompilowac od nowa, inaczej `bank.exe`
+> zostanie stary. I zamknij bank przed kompilacja, bo zalaczony plik jest zablokowany.
 
-## Pliki
+Potem odpalasz `bank.exe`.
 
-- `main.cpp` - menu i obsluga uzytkownika
-- `Bank.h/.cpp` - klasa Bank (logowanie, wczytywanie/zapis pliku, szukanie konta)
-- `KontoBankowe.h/.cpp` - pojedyncze konto (wplata, wyplata, dane)
+## Co jest w ktorym pliku
+
+- `main.cpp` - menu i cala obsluga uzytkownika
+- `Bank.h/.cpp` - klasa Bank (logowanie, czytanie/zapis pliku, szukanie konta)
+- `KontoBankowe.h/.cpp` - jedno konto (wplata, wyplata, dane)
 - `Klient.h` - dane klienta (imie, login, PIN)
-- `Interfejs.h/.cpp` - wyglad konsoli (kolory, logo) i dzwiek (Hava Nagila)
+- `Interfejs.h/.cpp` - wyglad konsoli (kolory, logo, ramki) i dzwieki
 - `uzytkownicy.csv` - baza kont
 
-## Przykladowe konta (login / PIN)
+## Konta do testu (login / PIN)
 
 - `jan` / `1234`
 - `anna` / `5678`
 - `danielg` / `6767`
-- `admin` / `admin` - panel admina (zakladanie kont)
+- `admin` / `admin` - panel admina
